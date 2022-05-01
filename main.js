@@ -1,6 +1,7 @@
 let gridWidth = 2; //Could use one variable for both width and height, this is easier to read though.
 let gridHeight = 2;
 let cellSize = 50;
+const maxGridSize = 960; //Max size of the grid in px.
 //let grid = [gridWidth,gridHeight];
 const gridContainer = document.querySelector('#grid-container');
 let setGridSize = ''
@@ -8,12 +9,12 @@ const generateGridButton = document.querySelector('button'); //Grab a reference 
 
 //Create the divs which makes up the grid.
 function createGrid(width, height){
-
+    cellSize = maxGridSize/width;
     for (let x = 0; x < width; x++) {
         for (let y = 0; y < height; y++) {
             let gridItem = document.createElement('div');
             gridItem.classList.add('grid-item');
-            gridItem.textContent = `${x}, ${y}`;
+            //gridItem.textContent = `${x}, ${y}`;
             gridContainer.appendChild(gridItem);
         }
     }
@@ -48,7 +49,10 @@ gridContainer.addEventListener('mouseover', function(e){
 //Generate new grid after pressing "Generate grid" button
 let gridSizeInput = '';
 generateGridButton.addEventListener('click', () =>{
-    gridSizeInput = prompt("How many squares do you want?") //Ask for the number squares per side for the new grid.
+    gridSizeInput = prompt("How many squares do you want? \n Maximum is 100.") //Ask for the number squares per side for the new grid.
+    if(gridSizeInput > 100){ //Sets maximum size to 100.
+        gridSizeInput = prompt("You entered more than 100. \n Enter a number less than 100");
+    }
     removeCurrentGrid(); //Remove the current grid.
     createGrid(gridSizeInput,gridSizeInput); //Create a new grid based on user input.
 })
