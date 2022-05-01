@@ -1,0 +1,11 @@
+#grid-container{
+    box-sizing: border-box;
+    display: grid;
+    background-color: aquamarine;
+}
+
+.grid-item{
+    border: 1px solid black;
+    padding: 12px;
+    text-align: center;
+}
